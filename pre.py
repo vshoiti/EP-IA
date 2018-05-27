@@ -38,12 +38,12 @@ def main():
     corpus2 = processCorpus(corpus1, params)
     freq_list = token_frequency_list(corpus2) # lista que contem todos os tokens e sua frequencia
     #print(freq_list)
-    # print(len(freq_list))
+    #print(len(freq_list))
     upper_terms_to_remove = int(len(freq_list) * float(upper_cut_percentage))
     lower_terms_to_remove = int(len(freq_list) * float(lower_cut_percentage))
-    #print num_terms_to_remove
+    #print upper_terms_to_remove
     blacklist = black_list(freq_list, upper_terms_to_remove, lower_terms_to_remove)
-    # print(len(blacklist))
+    #print(len(blacklist))
     #blacklist.append('aaa')
     #for token in blacklist:
     #    print(token, freq_list[token])
@@ -203,10 +203,10 @@ def black_list(freq_list, upper_terms_to_remove, lower_terms_to_remove):
     blacklist = []
     for word in freq_list.keys(): # para cada palavra que aparece 1 vez
         if freq_list[word] == 1:
-            del freq_list[word] # remove o termo da lista para nao ser removido novamente abaixo
             blacklist.append(word) # adiciona o termo a blacklist
 
-    print(len(blacklist))
+    for word in blacklist:
+        del freq_list[word]  # remove o termo da lista para nao ser removido novamente abaixo
 
     # ordena crescentemente a lista de freq. em uma lista de palavras
     sorted_key_list = sorted(freq_list.items(), key=operator.itemgetter(1))  # https://stackoverflow.com/a/613218
